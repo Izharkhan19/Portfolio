@@ -22,7 +22,7 @@ function Projects() {
 
         {/* PROFESSIONAL PROJECTS */}
         <h3 className="text-white purple text-start mt-5">
-          <strong className="purple">My Professional Project Works :</strong>
+          <strong className="purple">My Professional Projects Works :</strong>
           <hr></hr>
         </h3>
         <ProfessionalProjects />
