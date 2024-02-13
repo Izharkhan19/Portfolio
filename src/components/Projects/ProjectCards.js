@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { CgWebsite } from "react-icons/cg";
-import { BsGithub } from "react-icons/bs";
+import { BsGithub, BsViewList } from "react-icons/bs";
+import ViewProjectDisc from "../Modals/ViewProjectDisc";
 
 function ProjectCards(props) {
+  const [projName, setProjName] = useState("");
+  const [lgShow, setLgShow] = useState(false);
+
   return (
     <Card className="project-card-view">
       <Card.Img variant="top" src={props.imgPath} alt="card-img" />
@@ -13,10 +17,38 @@ function ProjectCards(props) {
         <Card.Text style={{ textAlign: "start" }}>
           {props.description}
         </Card.Text>
-        <Button variant="primary" href={props.ghLink} target="_blank">
-          <BsGithub /> &nbsp;
-          {props.isBlog ? "Blog" : "GitHub"}
-        </Button>
+        {props.isView ? (
+          <>
+            <Button
+              variant="primary"
+              href={props.ghLink}
+              target="_blank"
+              onClick={() => {
+                setProjName(props.title);
+                setLgShow(true);
+              }}
+            >
+              <BsViewList /> &nbsp;
+              {"View"}
+            </Button>
+
+            {lgShow && (
+              <ViewProjectDisc
+                title={props.title}
+                description={props.description}
+                projName={projName}
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+              />
+            )}
+          </>
+        ) : (
+          <Button variant="primary" href={props.ghLink} target="_blank">
+            <BsGithub /> &nbsp;
+            {props.isBlog ? "Blog" : "GitHub"}
+          </Button>
+        )}
+
         {"\n"}
         {"\n"}
 
